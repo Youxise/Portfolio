@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Active l'export statique (nécessaire pour Netlify)
-  output: 'export',
   
   // Pour éviter les problèmes de routing sur Netlify
   trailingSlash: true,
