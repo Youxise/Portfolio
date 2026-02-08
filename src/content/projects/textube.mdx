@@ -1,0 +1,161 @@
+---
+slug: 'textube'
+title: 'Textube - Moteur de Recherche dans les Transcriptions'
+stack: ['Python', 'Flask', 'Elasticsearch', 'Whisper']
+tags: ['Transcription', 'Recherche', 'Vidéo', 'Audio', 'IA']
+category: 'Application Web'
+cover: '/images/projects/textube/cover.png'
+gallery:
+  - '/images/projects/textube/main-page.png'
+  - '/images/projects/textube/results-example.png'
+  - '/images/projects/textube/transcription-example.png'
+links:
+  - label: 'GitHub'
+    href: 'https://github.com/Youxise/Textube'
+---
+
+## Résumé
+
+Textube est une application web permettant d'effectuer des recherches avancées dans les transcriptions de fichiers média (audio ou vidéo). L'application extrait automatiquement les transcriptions à partir de vidéos YouTube ou de fichiers téléchargés, puis permet de rechercher du texte avec correspondance floue, lemmatisation et recherche de phrases exactes.
+
+---
+
+## Contexte et Objectifs
+
+Dans un monde où le contenu vidéo et audio est omniprésent, il devient essentiel de pouvoir rechercher rapidement des informations spécifiques dans ces médias. Textube résout ce problème en offrant :
+
+- **Accessibilité** : Rendre le contenu audio/vidéo interrogeable et accessible
+- **Efficacité** : Localiser rapidement des passages spécifiques sans visionner l'intégralité du média
+- **Précision** : Utiliser des algorithmes de recherche avancés pour améliorer la pertinence des résultats
+
+L'objectif principal était de créer une solution complète permettant de transformer n'importe quel média en contenu texte interrogeable avec horodatage précis.
+
+---
+
+## Fonctionnalités principales
+
+### 1. Extraction de Transcriptions
+- **Support YouTube** : Téléchargement automatique de vidéos YouTube via yt-dlp
+- **Upload de fichiers** : Support des formats MP4, MP3, MKV
+- **Transcription IA** : Utilisation de Whisper (OpenAI) pour une transcription précise
+- **Horodatage** : Conservation des timestamps pour localiser les passages
+
+### 2. Recherche Avancée
+- **Correspondance floue (Fuzzy)** : Trouve les résultats même avec des fautes de frappe
+- **Lemmatisation** : Recherche basée sur les racines des mots
+- **Suppression des mots vides** : Filtrage automatique des mots non significatifs
+- **Recherche de phrases exactes** : Match précis pour les citations
+- **Mise en évidence** : Les termes recherchés sont surlignés dans les résultats
+
+### 3. Indexation Elasticsearch
+- **Analyseurs personnalisés** :
+  - `simple_analyzer` : Mise en minuscules uniquement
+  - `custom_analyzer` : Minuscules + suppression stop words + lemmatisation
+- **Stockage optimisé** : Indexation avec métadonnées temporelles
+- **Recherche combinée** : Plusieurs stratégies de recherche appliquées simultanément
+
+---
+
+## Technologies utilisées
+
+### Backend
+- **Python 3.10** : Langage de programmation principal
+- **Flask** : Framework web léger et flexible
+- **Whisper (OpenAI)** : Modèle IA de transcription audio
+- **yt-dlp** : Téléchargement de vidéos YouTube
+
+### Moteur de recherche
+- **Elasticsearch** : Base de données NoSQL orientée recherche
+- **Analyseurs personnalisés** : Pour le traitement du texte (racinisation, mots vides)
+
+### Frontend
+- **HTML/CSS** : Interface utilisateur simple et responsive
+- **JavaScript** : Gestion des interactions (loading, soumission de formulaire)
+
+### Autres outils
+- **Werkzeug** : Gestion sécurisée des fichiers téléchargés
+- **REST API** : Architecture avec endpoints dédiés (`/process`, `/search`)
+
+---
+
+## Architecture
+
+```
+Textube/
+├── app.py              # Application Flask principale
+├── transcription.py    # Module de transcription (Whisper + yt-dlp)
+├── search.py           # Module de recherche Elasticsearch
+├── templates/
+│   └── index.html      # Interface utilisateur
+├── static/
+│   └── styles.css      # Feuille de style
+└── uploads/            # Dossier temporaire pour les médias
+```
+
+---
+
+## Résultats
+
+### Accomplissements
+- Transcription automatique de vidéos/audios avec Whisper
+- Indexation complète dans Elasticsearch avec horodatage
+- Recherche multi-critères (floue, lemmatisation, exacte)
+- Interface web fonctionnelle et responsive
+- Support de multiples formats de fichiers
+
+### Performances
+- Transcription rapide avec le modèle Whisper (version "small" configurée)
+- Recherche quasi-instantanée grâce à Elasticsearch
+- Segmentation intelligente par tranches de 30 secondes
+- Mise en évidence automatique des résultats
+
+### Impact
+Textube rend accessible le contenu multimédia en permettant :
+- Une recherche textuelle dans n'importe quelle vidéo/audio
+- Un gain de temps considérable pour localiser des passages spécifiques
+- Une meilleure exploitation de contenus éducatifs ou documentaires
+
+---
+
+## Améliorations futures
+
+- Migration du frontend vers **React** pour une expérience utilisateur moderne
+- Implémentation de la transcription en **temps réel**
+- Ajout de timestamps au niveau des mots pour une précision accrue
+- Support multilingue avec détection automatique de la langue
+- Système d'authentification pour gérer des bibliothèques personnelles
+- Export des transcriptions en différents formats (SRT, VTT, TXT)
+
+---
+
+## Installation
+
+### Prérequis
+```bash
+# Python 3.10+
+# Elasticsearch installé et en cours d'exécution
+```
+
+### Installation des dépendances
+```bash
+pip install -r requirements.txt
+```
+
+### Lancement
+```bash
+python app.py
+```
+
+L'application sera accessible sur `http://localhost:5000`
+
+---
+
+## Utilisation
+
+1. **Accéder à l'application** : Ouvrir le navigateur sur `http://localhost:5000`
+2. **Choisir une source** :
+   - Coller un lien YouTube, OU
+   - Télécharger un fichier média local
+3. **Entrer le texte à rechercher** : Saisir le terme ou la phrase recherchée
+4. **Lancer la recherche** : Cliquer sur "Search"
+5. **Consulter les résultats** : Visualiser les segments correspondants avec leur horodatage

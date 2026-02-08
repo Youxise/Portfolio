@@ -1,0 +1,139 @@
+---
+slug: 'etl-pipeline-gcp'
+title: 'ETL Pipeline on Google Cloud Platform'
+stack: ['Python', 'Google Cloud Storage', 'Cloud Fusion', 'BigQuery', 'Looker Studio']
+tags: ['ETL', 'Data Engineering', 'Cloud', 'Big Data', 'Visualization']
+category: 'Data Engineering'
+cover: '/images/projects/etl-pipeline-gcp/cover.png'
+gallery:
+  - '/images/projects/etl-pipeline-gcp/architecture.png'
+links:
+  - label: 'GitHub'
+    href: 'https://github.com/Youxise/XXXXXX.IR'
+---
+
+## Summary
+
+This project demonstrates the implementation of a complete ETL (Extract, Transform, Load) pipeline on Google Cloud Platform. The system generates fake employee data, stores it in Google Cloud Storage, applies security and cleaning transformations via Cloud Fusion, then loads the data into BigQuery for final visualization with Looker Studio. This project illustrates best practices for processing sensitive data in the cloud.
+
+---
+
+## Context and Objectives
+
+In the context of enterprise data analysis, it is crucial to establish robust and secure pipelines to process sensitive employee information. This project aimed to:
+
+- **Demonstrate mastery of Google Cloud services** for large-scale data processing
+- **Implement security best practices**: encryption and masking of sensitive data (social security numbers, personal information)
+- **Create an automated end-to-end data flow** from generation to visualization
+- **Optimize storage and queries** for maximum performance with BigQuery
+- **Provide visual insights** via an interactive dashboard in Looker Studio
+
+---
+
+## Pipeline Architecture
+
+### 1. Data Generation (Extract)
+- **Faker Library**: Automatic generation of realistic fake employee data
+- **Generated Data**: 
+  - Personal information (first name, last name, age, address)
+  - Professional information (department, position, salary)
+  - Sensitive data (social security number, email)
+- **Initial Format**: Structured CSV
+- **Storage**: Upload to Google Cloud Storage (GCS) bucket
+
+### 2. Data Transformation (Transform)
+Cloud Fusion instance configuration to orchestrate transformations:
+
+- **Column Merging**: Concatenation of first name and last name into a single `full_name` field
+- **Data Masking**: Application of masking techniques on sensitive information (e.g., partial display of social security number)
+- **Encryption**: Encryption of critical fields for GDPR compliance
+- **Cleaning**: Removal of null values, format normalization, data validation
+- **Enrichment**: Addition of metadata (processing timestamp, pipeline version)
+
+### 3. Loading and Storage (Load)
+- **Destination**: BigQuery (data warehouse)
+- **Optimized Schema**: Tables partitioned by date to improve performance
+- **Indexing**: Creation of indexes on frequently queried columns
+
+### 4. Visualization and Analysis
+- **Looker Studio**: Creation of interactive dashboards
+- **Key Metrics**: 
+  - Employee distribution by department
+  - Salary analysis by position
+  - Workforce evolution over time
+  - Customizable HR indicators
+
+---
+
+## Technologies Used
+
+### Google Cloud Platform Services
+- **Google Cloud Storage (GCS)**: Online file storage in accessible buckets, used as a data source for the ETL pipeline
+- **Cloud Fusion**: Data integration platform enabling visual pipeline creation and automation of data flows between services
+- **Data Fusion**: Data management and transformation tool, allowing cleaning, enrichment, and masking of information before loading
+- **BigQuery**: Serverless data warehouse for fast analysis of large data volumes with SQL
+- **Looker Studio**: Data visualization tool for creating interactive dashboards
+
+### Languages and Libraries
+- **Python 3.10+**: Primary language for data generation
+- **Faker**: Library for generating realistic fake data
+- **pandas**: CSV data manipulation and structuring
+- **google-cloud-storage**: Python SDK to interact with GCS
+
+### Security and Compliance
+- **Encryption at rest**: Data encrypted in GCS and BigQuery
+- **Encryption in transit**: Secure communication between services via HTTPS
+- **Data Masking**: Pseudonymization techniques for GDPR compliance
+- **IAM Access Control**: Fine-grained permission management per service
+
+---
+
+## Results
+
+### Achievements
+- Fully automated and functional ETL pipeline on GCP
+- Generation and processing of thousands of employee records
+- Successful implementation of sensitive data masking and encryption
+- Optimized SQL queries in BigQuery with response time < 1 second
+- Interactive Looker Studio dashboard with 5+ key visualizations
+- Compliance with GDPR standards for personal data protection
+
+### Performance
+- **Scalability**: Architecture capable of processing millions of rows without modification
+- **Cost Optimized**: Use of serverless services to pay only for consumed resources
+- **Execution Time**: Complete pipeline in less than 5 minutes for 100k records
+- **Reliability**: Automatic error handling and integrated retry logic
+
+### Demonstrated Skills
+- Mastery of the Google Cloud Platform ecosystem
+- Deep understanding of ETL and data engineering concepts
+- Implementation of data security and encryption
+- Query and data structure optimization
+- Creation of effective visualizations for decision-making
+
+---
+
+## Impact and Applications
+
+This project demonstrates an ability to:
+- Design and implement modern and scalable cloud architectures
+- Manage sensitive data in compliance with regulations (GDPR, CCPA)
+- Automate complex data processing workflows
+- Create end-to-end solutions from source to visualization
+
+**Practical Applications**:
+- HR management systems with data protection
+- Analytics pipelines for decision support
+- Automated reporting solutions for businesses
+- Data compliance and audit platforms
+
+---
+
+## Future Improvements
+
+- **Streaming Addition**: Migration to Cloud Dataflow for real-time processing
+- **Machine Learning**: Integration of predictive models (turnover prediction, salary analysis)
+- **Alerting**: Notification system for data anomalies detected
+- **Multi-sources**: Pipeline extension to ingest data from multiple sources (APIs, SQL databases)
+- **Governance**: Implementation of Data Catalog for data discovery and governance
+- **CI/CD**: Deployment automation with Cloud Build and Terraform

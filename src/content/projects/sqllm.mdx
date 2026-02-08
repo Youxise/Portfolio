@@ -1,0 +1,495 @@
+---
+slug: sqllm
+title: "SQLLM - Comparaison d'Outils IA pour Bases de Données"
+stack:
+  - Python
+  - Streamlit
+  - ChromaDB
+  - PostgreSQL
+  - MongoDB
+  - Ollama
+tags:
+  - Vector Search
+  - Text-to-SQL
+  - RAG
+  - IA
+  - Bases de données
+  - Embeddings
+category: Application Web
+cover: /images/projects/sqllm/cover.png
+gallery:
+  - /images/projects/sqllm/vector-search.png
+  - /images/projects/sqllm/text-to-sql.png
+  - /images/projects/sqllm/rag-qa.png
+links:
+  - label: GitHub
+    href: https://github.com/Youxise/SQLLM
+---
+
+
+
+## Résumé
+
+
+
+SQLLM est une application web interactive permettant de comparer et d'expérimenter trois technologies d'IA appliquées aux bases de données : la recherche vectorielle (Vector Search), la génération de requêtes SQL en langage naturel (Text-to-SQL), et la génération augmentée par récupération (RAG). L'application propose une interface Streamlit pour tester ces technologies en temps réel avec différents backends de bases de données.
+
+
+
+---
+
+
+
+## Contexte et Objectifs
+
+
+
+Avec l'émergence de l'IA générative et des embeddings, les bases de données évoluent pour intégrer nativement des capacités de recherche sémantique et de génération de requêtes. Ce projet explore et compare ces nouvelles fonctionnalités à travers :
+
+
+
+- **Accessibilité** : Rendre les technologies IA de bases de données compréhensibles et testables
+
+- **Comparaison** : Évaluer les performances de différents backends (ChromaDB, PostgreSQL+pgvector, SQLite-vec, MongoDB)
+
+- **Démonstration pratique** : Permettre l'expérimentation avec des exemples concrets et des benchmarks en temps réel
+
+
+
+L'objectif principal était de créer une plateforme de démonstration complète illustrant comment l'IA transforme l'interaction avec les bases de données, de la recherche sémantique à la génération de requêtes en langage naturel.
+
+
+
+---
+
+
+
+## Fonctionnalités principales
+
+
+
+### 1. Vector Search Comparatif
+
+- **Multi-backend** : Comparaison simultanée de 4 solutions de recherche vectorielle
+
+  - ChromaDB : Base vectorielle locale légère
+
+  - PostgreSQL + pgvector : Extension vectorielle pour bases relationnelles
+
+  - SQLite + sqlite-vec : Solution embarquée ultra-légère
+
+  - MongoDB : Recherche vectorielle NoSQL
+
+- **Embeddings automatiques** : Génération via Sentence Transformers (all-MiniLM-L6-v2)
+
+- **Benchmarks en temps réel** : 
+
+  - Temps d'indexation (documents/seconde)
+
+  - Latence de recherche (millisecondes)
+
+  - Débit (requêtes par seconde)
+
+- **Recherche sémantique** : Requêtes en langage naturel avec scoring de similarité
+
+- **Export des résultats** : Téléchargement des benchmarks au format CSV
+
+
+
+### 2. Text-to-SQL avec IA
+
+- **Génération dynamique** : Utilisation d'Ollama (LLM local) pour convertir le langage naturel en SQL
+
+- **Mode démo** : Exemples pré-définis pour tester sans LLM
+
+- **Base de données démo** : Schéma client/produit/commande pré-rempli
+
+- **Exécution en temps réel** : Génération et exécution immédiate des requêtes SQL
+
+- **Comparaison des solutions** : Tableau récapitulatif des approches Text-to-SQL
+
+  - Oracle Select AI (intégré 23ai)
+
+  - pgEdge NL Agents (extension PostgreSQL)
+
+  - SQL Server 2025
+
+  - MongoDB Compass
+
+
+
+### 3. RAG (Question-Réponse)
+
+- **Pipeline RAG complet** :
+
+  1. **Indexation** : Documents stockés dans ChromaDB avec embeddings
+
+  2. **Retrieval** : Recherche des passages les plus pertinents
+
+  3. **Augmentation** : Construction du contexte pour le LLM
+
+  4. **Generation** : Réponse générée par Ollama avec citations des sources
+
+- **Base de connaissances** : 5 documents techniques sur les bases de données vectorielles
+
+- **Mode sans LLM** : Affichage direct des passages pertinents si Ollama indisponible
+
+- **Métriques détaillées** : Temps de retrieval et génération affichés séparément
+
+- **Mise en évidence** : Documents récupérés visibles avec leurs métadonnées
+
+
+
+---
+
+
+
+## Technologies utilisées
+
+
+
+### Backend
+
+- **Python 3.8+** : Langage principal
+
+- **Streamlit** : Framework web pour applications data science interactives
+
+- **Ollama** : LLM local pour génération (llama3.2:1b)
+
+- **Sentence Transformers** : Génération d'embeddings (all-MiniLM-L6-v2, 384 dimensions)
+
+
+
+### Bases de données vectorielles
+
+- **ChromaDB** : Base vectorielle pure Python
+
+- **PostgreSQL + pgvector** : Extension vectorielle pour PostgreSQL 15+
+
+- **SQLite + sqlite-vec** : Extension vectorielle SQLite
+
+- **MongoDB** : Atlas Vector Search
+
+
+
+### Visualisation et benchmarks
+
+- **Pandas** : Manipulation de données et affichage de tableaux
+
+- **Plotly** : Graphiques interactifs pour les benchmarks
+
+- **BenchmarkTracker** : Module personnalisé de suivi des performances
+
+
+
+### Infrastructure
+
+- **Docker Compose** : Déploiement de PostgreSQL et MongoDB
+
+- **psycopg2** : Connecteur PostgreSQL avec support JSONB
+
+- **pymongo** : Driver MongoDB officiel
+
+
+
+---
+
+
+
+## Architecture
+
+
+
+```
+
+Demo/
+
+├── app.py                              # Application Streamlit principale
+
+├── requirements.txt                    # Dépendances Python
+
+├── docker-compose.yml                  # Services PostgreSQL & MongoDB
+
+├── src/
+
+│   ├── vector_search/
+
+│   │   ├── vector_search_comparative.py  # Comparaison multi-backend
+
+│   │   ├── sqlite_backend.py             # Backend SQLite-vec
+
+│   │   ├── postgres_backend.py           # Backend PostgreSQL+pgvector
+
+│   │   └── mongodb_backend.py            # Backend MongoDB Atlas
+
+│   ├── text_to_sql/
+
+│   │   └── text_to_sql_enhanced.py       # Génération SQL avec Ollama
+
+│   ├── rag/
+
+│   │   └── rag_enhanced.py               # Pipeline RAG complet
+
+│   └── utils/
+
+│       └── benchmarks.py                 # Module de benchmarking
+
+├── data/                               # Stockage des données
+
+└── README.md                           # Documentation complète
+
+```
+
+
+
+---
+
+
+
+## Résultats
+
+
+
+### Accomplissements
+
+- **Interface multi-modules** : Navigation fluide entre Vector Search, Text-to-SQL et RAG
+
+- **Comparaison exhaustive** : 4 backends vectoriels testés simultanément
+
+- **Benchmarks précis** : Métriques d'indexation et de recherche en temps réel
+
+- **Génération SQL fonctionnelle** : Conversion langage naturel → SQL avec Ollama
+
+- **Pipeline RAG opérationnel** : Retrieval + Generation avec citations des sources
+
+- **Docker-ready** : Déploiement simplifié de PostgreSQL et MongoDB
+
+
+
+### Performances (benchmarks moyens sur 8 documents)
+
+
+
+| Backend | Indexation | Latence Recherche | Débit |
+
+|---------|-----------|-------------------|-------|
+
+| ChromaDB | 0.2s | 10-30ms | ~3000 QPS |
+
+| SQLite-vec | <0.1s | 5-15ms | ~1000 QPS |
+
+| PostgreSQL pgvector | 0.3s | 5-15ms | ~5000 QPS |
+
+| MongoDB | 0.4s | 10-30ms | ~8000 QPS |
+
+
+
+### Impact
+
+Ce projet démontre concrètement :
+
+- **L'accessibilité des technologies IA** : N'importe qui peut tester Vector Search et Text-to-SQL
+
+- **La maturité des solutions** : Les extensions comme pgvector sont production-ready
+
+- **Le potentiel du RAG** : Réponses contextualisées et sourcées automatiquement
+
+- **L'importance du choix de backend** : Chaque solution a ses avantages (performance, simplicité, intégration)
+
+
+
+---
+
+
+
+## Améliorations futures
+
+
+
+### Fonctionnalités
+
+- **Support d'autres LLM** : Intégration OpenAI, Claude, Mistral via API
+
+- **Vectorisation de fichiers** : Upload et indexation de PDF, DOCX, TXT
+
+- **Persistance des collections** : Sauvegarde et rechargement des bases vectorielles
+
+- **Recherche hybride** : Combinaison recherche vectorielle + BM25
+
+- **Filtrage par métadonnées** : Recherche avec contraintes temporelles, thématiques
+
+
+
+### Optimisations
+
+- **Quantization d'embeddings** : Réduction de la taille des vecteurs (float32 → int8)
+
+- **Indexation HNSW optimisée** : Tuning des paramètres M et efConstruction
+
+- **Cache de requêtes** : Mémorisation des résultats fréquents
+
+- **Batch processing** : Indexation par lots pour grandes volumétries
+
+
+
+### Interface
+
+- **Graphiques avancés** : Visualisation des espaces vectoriels (t-SNE, UMAP)
+
+- **Mode dark** : Thème sombre pour Streamlit
+
+- **Multi-langue** : Support du français et de l'anglais dans l'interface
+
+- **Export de rapports** : Génération PDF des comparaisons et benchmarks
+
+
+
+---
+
+
+
+## Installation
+
+
+
+### Prérequis
+
+```bash
+
+# Python 3.8+
+
+# 2GB RAM minimum
+
+# Docker (optionnel, pour PostgreSQL/MongoDB)
+
+# Ollama (optionnel, pour Text-to-SQL et RAG)
+
+```
+
+
+
+### Installation des dépendances
+
+```bash
+
+# Cloner le repository
+
+git clone https://github.com/Youxise/SQLLM.git
+
+cd SQLLM
+
+
+
+# Créer un environnement virtuel
+
+python -m venv .venv
+
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+
+
+# Installer les dépendances
+
+pip install -r requirements.txt
+
+```
+
+
+
+### Démarrage des services (optionnel)
+
+```bash
+
+# Lancer PostgreSQL et MongoDB avec Docker
+
+docker-compose up -d
+
+
+
+# Installer Ollama (pour Text-to-SQL et RAG)
+
+# Télécharger depuis https://ollama.ai
+
+ollama pull llama3.2:1b
+
+```
+
+
+
+### Lancement de l'application
+
+```bash
+
+streamlit run app.py
+
+```
+
+
+
+L'application sera accessible sur `http://localhost:8501`
+
+
+
+---
+
+
+
+## Utilisation
+
+
+
+### Module 1 : Vector Search
+
+1. **Sélectionner les backends** : Cocher ChromaDB, SQLite, PostgreSQL, MongoDB
+
+2. **Indexer les documents** : Cliquer sur "Index in all selected backends"
+
+3. **Poser une question** : Saisir une requête en langage naturel (ex: "What is a vector database?")
+
+4. **Comparer les résultats** : Visualiser les temps de recherche et les documents retournés par chaque backend
+
+5. **Exporter les benchmarks** : Télécharger le CSV des performances
+
+
+
+### Module 2 : Text-to-SQL
+
+1. **Choisir le mode** :
+
+   - "Write a question" : Génération dynamique avec Ollama
+
+   - "Pre-defined examples" : Requêtes SQL pré-écrites
+
+2. **Poser une question en langage naturel** : Ex: "Top 3 customers by spending"
+
+3. **Générer et exécuter** : Le SQL est généré, affiché et exécuté automatiquement
+
+4. **Consulter les résultats** : Tableau des données retournées
+
+
+
+### Module 3 : RAG Q&A
+
+1. **Indexer la base de connaissances** : Cliquer sur "Index documents"
+
+2. **Poser une question** : Ex: "How to install pgvector in PostgreSQL?"
+
+3. **Choisir le mode** :
+
+   - Avec Ollama : Réponse générée automatiquement
+
+   - Sans Ollama : Affichage des passages pertinents uniquement
+
+4. **Consulter la réponse** : Réponse contextualisée avec citations des sources et métriques
+
+
+
+---
+
+
+
+## Conclusion
+
+
+
+SQLLM illustre comment l'IA révolutionne l'interaction avec les bases de données. En permettant la comparaison directe de différentes solutions de Vector Search, la génération de SQL en langage naturel et l'implémentation d'un pipeline RAG complet, ce projet offre une vision pratique et éducative des technologies émergentes dans le domaine des bases de données augmentées par l'IA.

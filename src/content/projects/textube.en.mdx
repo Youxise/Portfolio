@@ -1,0 +1,161 @@
+---
+slug: 'textube'
+title: 'Textube - Transcript Search Engine'
+stack: ['Python', 'Flask', 'Elasticsearch', 'Whisper']
+tags: ['Transcription', 'Search', 'Video', 'Audio', 'AI']
+category: 'Web Application'
+cover: '/images/projects/textube/cover.png'
+gallery:
+  - '/images/projects/textube/main-page.png'
+  - '/images/projects/textube/results-example.png'
+  - '/images/projects/textube/transcription-example.png'
+links:
+  - label: 'GitHub'
+    href: 'https://github.com/Youxise/Textube'
+---
+
+## Summary
+
+Textube is a web application that enables advanced searches within transcriptions of media files (audio or video). The application automatically extracts transcriptions from YouTube videos or uploaded files, then allows text searches with fuzzy matching, lemmatization, and exact phrase searches.
+
+---
+
+## Context and Objectives
+
+In a world where video and audio content is ubiquitous, it becomes essential to quickly search for specific information within these media. Textube solves this problem by offering:
+
+- **Accessibility**: Make audio/video content searchable and accessible
+- **Efficiency**: Quickly locate specific passages without viewing the entire media
+- **Precision**: Use advanced search algorithms to improve result relevance
+
+The main objective was to create a complete solution for transforming any media into searchable text content with precise timestamps.
+
+---
+
+## Key Features
+
+### 1. Transcript Extraction
+- **YouTube Support**: Automatic YouTube video download via yt-dlp
+- **File Upload**: Support for MP4, MP3, MKV formats
+- **AI Transcription**: Use of Whisper (OpenAI) for accurate transcription
+- **Timestamps**: Preservation of timestamps to locate passages
+
+### 2. Advanced Search
+- **Fuzzy Matching**: Finds results even with typos
+- **Lemmatization**: Search based on word roots
+- **Stop Words Removal**: Automatic filtering of non-significant words
+- **Exact Phrase Search**: Precise match for quotes
+- **Highlighting**: Searched terms are highlighted in results
+
+### 3. Elasticsearch Indexing
+- **Custom Analyzers**:
+  - `simple_analyzer`: Lowercase only
+  - `custom_analyzer`: Lowercase + stop words removal + lemmatization
+- **Optimized Storage**: Indexing with temporal metadata
+- **Combined Search**: Multiple search strategies applied simultaneously
+
+---
+
+## Technologies Used
+
+### Backend
+- **Python 3.10**: Main programming language
+- **Flask**: Lightweight and flexible web framework
+- **Whisper (OpenAI)**: AI audio transcription model
+- **yt-dlp**: YouTube video download
+
+### Search Engine
+- **Elasticsearch**: Search-oriented NoSQL database
+- **Custom Analyzers**: For text processing (stemming, stop words)
+
+### Frontend
+- **HTML/CSS**: Simple and responsive user interface
+- **JavaScript**: Interaction management (loading, form submission)
+
+### Other Tools
+- **Werkzeug**: Secure file upload management
+- **REST API**: Architecture with dedicated endpoints (`/process`, `/search`)
+
+---
+
+## Architecture
+
+```
+Textube/
+├── app.py              # Main Flask application
+├── transcription.py    # Transcription module (Whisper + yt-dlp)
+├── search.py           # Elasticsearch search module
+├── templates/
+│   └── index.html      # User interface
+├── static/
+│   └── styles.css      # Stylesheet
+└── uploads/            # Temporary folder for media
+```
+
+---
+
+## Results
+
+### Achievements
+- Automatic video/audio transcription with Whisper
+- Complete Elasticsearch indexing with timestamps
+- Multi-criteria search (fuzzy, lemmatization, exact)
+- Functional and responsive web interface
+- Support for multiple file formats
+
+### Performance
+- Fast transcription with Whisper model ("small" version configured)
+- Near-instantaneous search thanks to Elasticsearch
+- Intelligent segmentation in 30-second chunks
+- Automatic result highlighting
+
+### Impact
+Textube makes multimedia content accessible by enabling:
+- Text search in any video/audio
+- Considerable time savings for locating specific passages
+- Better exploitation of educational or documentary content
+
+---
+
+## Future Improvements
+
+- Frontend migration to **React** for a modern user experience
+- Implementation of **real-time** transcription
+- Addition of word-level timestamps for increased precision
+- Multilingual support with automatic language detection
+- Authentication system to manage personal libraries
+- Export transcriptions in different formats (SRT, VTT, TXT)
+
+---
+
+## Installation
+
+### Prerequisites
+```bash
+# Python 3.10+
+# Elasticsearch installed and running
+```
+
+### Dependency Installation
+```bash
+pip install -r requirements.txt
+```
+
+### Launch
+```bash
+python app.py
+```
+
+The application will be accessible at `http://localhost:5000`
+
+---
+
+## Usage
+
+1. **Access the application**: Open browser at `http://localhost:5000`
+2. **Choose a source**:
+   - Paste a YouTube link, OR
+   - Upload a local media file
+3. **Enter search text**: Type the term or phrase to search for
+4. **Launch search**: Click "Search"
+5. **View results**: View matching segments with their timestamps

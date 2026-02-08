@@ -1,0 +1,100 @@
+---
+slug: 'rec'
+title: 'Rec - Anime Recommendation System'
+stack: ['Python', 'Flask', 'PostgreSQL', 'Machine Learning', 'Docker']
+tags: ['Web', 'API', 'Recommendation', 'Machine Learning', 'Anime']
+category: 'Web Application'
+cover: '/images/projects/rec/cover.png'
+gallery:
+  - '/images/projects/rec/search-animes.png'
+  - '/images/projects/rec/results.png'
+  - '/images/projects/rec/other-pages.png'
+links:
+  - label: 'GitHub'
+    href: 'https://github.com/Youxise/Rec'
+---
+
+## Summary
+
+Rec is a web application that allows users to discover and receive personalized anime recommendations based on their preferences. The system uses two complementary recommendation algorithms: Content-Based Filtering and Collaborative Filtering via FP-Growth. The application helps users quickly find anime similar to those they have enjoyed.
+
+---
+
+## Context and Objectives
+
+This project was developed to solve the problem of discovering anime in a vast and growing catalog. The main objectives were to:
+
+- Create a hybrid recommendation system combining multiple algorithmic approaches
+- Provide an intuitive and responsive user interface for searching and selecting anime
+- Leverage anime metadata (genres, synopsis, popularity, scores) to generate relevant recommendations
+- Use modern machine learning techniques, particularly text embeddings via sentence-transformers
+- Deploy the application in a containerized environment for ease of deployment and scalability
+
+---
+
+## Key Features
+
+**Real-time intelligent search**: Search interface with automatic suggestions during input, allowing users to quickly find anime in the database.
+
+**Hybrid personalized recommendations**: System combining two complementary algorithms:
+- Content-based filtering: Uses text embeddings (synopsis, genres) and numerical features (score, popularity, episodes) with cosine similarity
+- Collaborative filtering: Leverages the FP-Growth algorithm to identify association patterns between anime based on user behaviors
+
+**Multiple selection**: Users can select up to 5 anime to refine their recommendations, with the system then aggregating similarities to produce optimal suggestions.
+
+**Database exploration** (coming soon): Feature allowing sorting and filtering of anime by score, popularity, and release date.
+
+---
+
+## Technologies Used
+
+**Backend**: 
+- Python 3.10
+- Flask (lightweight web framework)
+- SQLAlchemy (ORM for database management)
+- psycopg2 (PostgreSQL connector)
+
+**Machine Learning**:
+- sentence-transformers (text embedding generation for semantic analysis)
+- scikit-learn (cosine similarity calculation)
+- mlxtend (FP-Growth implementation for collaborative filtering)
+- NumPy and Pandas (data processing)
+
+**Database**: 
+- PostgreSQL (storage of anime metadata, user transactions, and association rules)
+
+**Frontend**: 
+- HTML5, CSS3, JavaScript
+- Bootstrap 5 (CSS framework for responsive design)
+- jQuery (dynamic interactions)
+- SweetAlert2 (elegant user notifications)
+
+**DevOps**: 
+- Docker (application containerization)
+- GitHub Actions (CI/CD)
+
+**Testing**:
+- pytest (unit and integration testing framework)
+
+---
+
+## Results
+
+The Rec application successfully demonstrates the effectiveness of a hybrid approach for anime recommendation. By combining content-based filtering with collaborative filtering, the system generates diverse and relevant recommendations that consider both the intrinsic characteristics of anime and user consumption patterns.
+
+**Achievements**:
+- Functional recommendation system integrating two complementary algorithms
+- Modern and intuitive user interface with real-time search
+- Scalable architecture with Docker containerization
+- Structured database with optimized tables (metadata, transactions, association rules)
+- Data pipeline including scraping, cleaning, and embedding generation
+- Automated tests to ensure reliability of recommendations and API routes
+
+**Impact**:
+The project demonstrates mastery of advanced machine learning concepts applied to a concrete use case, as well as a deep understanding of modern web architectures. The use of text embeddings via sentence-transformers shows a state-of-the-art approach for semantic analysis, while the FP-Growth algorithm effectively captures frequent associations in user data.
+
+**Improvement perspectives**:
+- Deployment of the discovery feature with advanced filters
+- Addition of a user authentication system for further personalization of recommendations
+- Performance optimization with caching of embeddings and similarity calculations
+- Extension of the database with more metadata (studios, voices, adaptations)

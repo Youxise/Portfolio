@@ -1,0 +1,71 @@
+---
+slug: 'tifinagh-mnist-classification'
+title: 'Tifinagh Character Classification with Deep Learning'
+stack: ['Python', 'TensorFlow', 'Keras', 'Google Colab']
+tags: ['Deep Learning', 'CNN', 'Computer Vision', 'Classification']
+category: 'Artificial Intelligence'
+cover: '/images/projects/tifinagh-mnist/cover.png'
+gallery:
+  - '/images/projects/tifinagh-mnist/conf_matrix.png'
+  - '/images/projects/tifinagh-mnist/prediction_confidence.png'
+  - '/images/projects/tifinagh-mnist/TruePositive_examples.png'
+links:
+  - label: 'GitHub'
+    href: 'https://github.com/Youxise/Tifinagh-MNIST-Classification'
+---
+
+## Summary
+
+Image classification project using deep learning to recognize the 33 characters of the Tifinagh alphabet (Berber alphabet). The system uses Convolutional Neural Networks (CNN) and transfer learning with MobileNetV2 to achieve a validation accuracy of 88.18%. This project solves the problem of automatic Tifinagh handwriting recognition, an important step for the preservation and digitization of Berber culture.
+
+---
+
+## Context and Objectives
+
+The Tifinagh alphabet is used to write Berber languages and represents an important cultural heritage of North Africa. With digital evolution, it becomes crucial to develop automatic character recognition tools to facilitate document digitization, education, and accessibility.
+
+**Main objectives:**
+- Create a dataset of Tifinagh character images (24,064 images in total)
+- Develop a deep learning model capable of classifying the 33 characters of the alphabet
+- Compare different neural network architectures (custom CNN vs Transfer Learning)
+- Achieve high accuracy for practical use
+
+---
+
+## Key Features
+
+- **Dataset Generation**: Automatic conversion of CSV data to PNG images structured by character (csv2png.ipynb)
+- **Advanced Preprocessing**: Data augmentation with rotation, translation, zoom, shearing, and brightness adjustment to improve model robustness
+- **Custom CNN Architecture**: Sequential model with convolutional layers, max pooling, dropout to prevent overfitting
+- **Transfer Learning**: Use of MobileNetV2 pre-trained on ImageNet with fine-tuning of the last 15 layers
+- **Comprehensive Evaluation**: Detailed classification report and confusion matrix to analyze performance per character
+
+---
+
+## Technologies Used
+
+- **Deep Learning Framework**: TensorFlow 2.x, Keras
+- **Models**: 
+  - Custom CNN (3 convolutional layers, 32→64→128 filters)
+  - MobileNetV2 (transfer learning with ImageNet)
+- **Image Processing**: ImageDataGenerator for data augmentation
+- **Evaluation**: scikit-learn (classification_report, confusion_matrix)
+- **Environment**: Google Colab, Jupyter Notebook
+- **Storage**: Google Drive for dataset
+- **Others**: NumPy for numerical processing
+
+---
+
+## Results
+
+The project demonstrated impressive performance in Tifinagh character classification:
+
+- **Validation accuracy: 88.18%** (after 10 epochs with custom CNN model)
+- **Dataset created**: 24,064 images (19,257 for training, 4,807 for validation) distributed across 33 classes
+- **Progressive improvement**: Accuracy increased from 42% (epoch 1) to 88.18% (epoch 10), showing good convergence
+- **Validation Loss**: 0.3891, indicating a well-generalized model without significant overfitting
+- **Training time**: Approximately 140 seconds per epoch on Google Colab
+
+**Impact:** This project paves the way for practical applications such as digitizing Berber manuscripts, predictive keyboards, Tifinagh alphabet learning tools, and contributes to the preservation of Berber cultural heritage in the digital age.
+
+**Saved Model**: The trained model (my_model.h5) can be reused to make predictions on new Tifinagh character images.

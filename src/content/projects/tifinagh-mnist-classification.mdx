@@ -1,0 +1,71 @@
+---
+slug: 'tifinagh-mnist-classification'
+title: 'Classification de Caractères Tifinagh avec Deep Learning'
+stack: ['Python', 'TensorFlow', 'Keras', 'Google Colab']
+tags: ['Deep Learning', 'CNN', 'Computer Vision', 'Classification']
+category: 'Intelligence Artificielle'
+cover: '/images/projects/tifinagh-mnist/cover.png'
+gallery:
+  - '/images/projects/tifinagh-mnist/conf_matrix.png'
+  - '/images/projects/tifinagh-mnist/prediction_confidence.png'
+  - '/images/projects/tifinagh-mnist/TruePositive_examples.png'
+links:
+  - label: 'GitHub'
+    href: 'https://github.com/Youxise/Tifinagh-MNIST-Classification'
+---
+
+## Résumé
+
+Projet de classification d'images utilisant le deep learning pour reconnaître les 33 caractères de l'alphabet Tifinagh (alphabet berbère). Le système utilise des réseaux de neurones convolutifs (CNN) et le transfer learning avec MobileNetV2 pour atteindre une précision de validation de 88,18%. Ce projet résout le problème de la reconnaissance automatique de l'écriture Tifinagh, une étape importante pour la préservation et la digitalisation de la culture berbère.
+
+---
+
+## Contexte et Objectifs
+
+L'alphabet Tifinagh est utilisé pour écrire les langues berbères et représente un patrimoine culturel important d'Afrique du Nord. Avec l'évolution numérique, il devient crucial de développer des outils de reconnaissance automatique de ces caractères pour faciliter la numérisation de documents, l'enseignement et l'accessibilité.
+
+**Objectifs principaux :**
+- Créer un dataset d'images de caractères Tifinagh (24 064 images au total)
+- Développer un modèle de deep learning capable de classifier les 33 caractères de l'alphabet
+- Comparer différentes architectures de réseaux de neurones (CNN custom vs Transfer Learning)
+- Atteindre une précision élevée pour une utilisation pratique
+
+---
+
+## Fonctionnalités principales
+
+- **Génération de Dataset** : Conversion automatique de données CSV en images PNG structurées par caractère (csv2png.ipynb)
+- **Prétraitement Avancé** : Augmentation de données avec rotation, translation, zoom, cisaillement et ajustement de luminosité pour améliorer la robustesse du modèle
+- **Architecture CNN Personnalisée** : Modèle séquentiel avec couches convolutives, max pooling, dropout pour éviter le surapprentissage
+- **Transfer Learning** : Utilisation de MobileNetV2 pré-entraîné sur ImageNet avec fine-tuning des 15 dernières couches
+- **Évaluation Complète** : Rapport de classification détaillé et matrice de confusion pour analyser les performances par caractère
+
+---
+
+## Technologies utilisées
+
+- **Framework de Deep Learning** : TensorFlow 2.x, Keras
+- **Modèles** : 
+  - CNN personnalisé (3 couches convolutives, 32→64→128 filtres)
+  - MobileNetV2 (transfer learning avec ImageNet)
+- **Traitement d'images** : ImageDataGenerator pour l'augmentation de données
+- **Évaluation** : scikit-learn (classification_report, confusion_matrix)
+- **Environnement** : Google Colab, Jupyter Notebook
+- **Stockage** : Google Drive pour le dataset
+- **Autres** : NumPy pour le traitement numérique
+
+---
+
+## Résultats
+
+Le projet a démontré des performances impressionnantes dans la classification des caractères Tifinagh :
+
+- **Précision de validation : 88,18%** (après 10 epochs avec le modèle custom CNN)
+- **Dataset créé** : 24 064 images (19 257 pour l'entraînement, 4 807 pour la validation) réparties sur 33 classes
+- **Amélioration progressive** : La précision est passée de 42% (epoch 1) à 88,18% (epoch 10), montrant une bonne convergence
+- **Validation Loss** : 0.3891, indiquant un modèle bien généralisé sans surapprentissage significatif
+- **Temps d'entraînement** : Environ 140 secondes par epoch sur Google Colab
+
+**Impact :** Ce projet ouvre la voie à des applications pratiques comme la numérisation de manuscrits berbères, des claviers prédictifs, des outils d'apprentissage de l'alphabet Tifinagh, et contribue à la préservation du patrimoine culturel berbère à l'ère numérique.
+
+**Modèle sauvegardé** : Le modèle entraîné (my_model.h5) peut être réutilisé pour faire des prédictions sur de nouvelles images de caractères Tifinagh.
