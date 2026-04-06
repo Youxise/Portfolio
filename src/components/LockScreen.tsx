@@ -228,7 +228,7 @@ const LockScreen: React.FC<LockScreenProps> = ({ onLogin }) => {
             transition={{ delay: 0.8, duration: 0.6 }}
             className="text-2xl font-light text-white mb-2"
           >
-             Youcef MOULAI
+             Joseph MOULAI
           </motion.h2>
           <motion.p
             initial={{ y: 20, opacity: 0 }}

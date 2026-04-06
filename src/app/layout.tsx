@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: 'AI & Data Portfolio',
   description: 'Interactive desktop portfolio showcasing AI and data projects',
   keywords: ['AI', 'Data', 'Machine Learning', 'Deep Learning', 'Data Science', 'Python', 'R'],
-  authors: [{ name: 'MOULAI Youcef' }],
+  authors: [{ name: 'MOULAI Joseph' }],
   viewport: 'width=device-width, initial-scale=1',
 }
 
